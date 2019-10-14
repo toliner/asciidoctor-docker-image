@@ -14,12 +14,5 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag asciidoctor:$(date +%s) -t docker.pkg.github.com/toliner/asciidoctor-docker-image/asciidoctor:$(date +%s)
-  
-  publish:
-    needs: [build]
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v1
-      - name: Publish the Docker image
-        run: docker push docker.pkg.github.com/toliner/asciidoctor-docker-image/asciidoctor:$(date +%s)
+    - name: Publish the Docker image
+      run: docker push docker.pkg.github.com/toliner/asciidoctor-docker-image/asciidoctor:$(date +%s)
