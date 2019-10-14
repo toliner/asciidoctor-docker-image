@@ -13,7 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build and publish
+      env: 
+        PACKAGES_ACCESS_TOKEN: ${{ secrets. PACKAGES_ACCESS_TOKEN }}
       run: |
         export DOCKER_TAG_NAME=$(date +%s)
+        docker login docker.pkg.github.com -u toliner -p $PACKAGES_ACCESS_TOKEN
         docker build . --file Dockerfile -t "docker.pkg.github.com/toliner/asciidoctor-docker-image/asciidoctor:$DOCKER_TAG_NAME"
         docker push "docker.pkg.github.com/toliner/asciidoctor-docker-image/asciidoctor:$DOCKER_TAG_NAME"
