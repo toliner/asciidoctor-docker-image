@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag asciidoctor:$(echo $GITHUB_REF | awk -F'/' `{print $3}`)
+      run: docker build . --file Dockerfile --tag asciidoctor:$(echo $GITHUB_REF | awk -F'/' `{ print $3 }`)
