@@ -12,7 +12,11 @@ jobs:
  
     steps:
     - uses: actions/checkout@v1
+    - name: Set tag name
+      run: export DOCKER_TAG_NAME=$(date +%s)
+      
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag asciidoctor:$(date +%s) -t docker.pkg.github.com/toliner/asciidoctor-docker-image/asciidoctor:$(date +%s)
+      run: docker build . --file Dockerfile --tag asciidoctor:$(date +%s) -t docker.pkg.github.com/toliner/asciidoctor-docker-image/asciidoctor:$DOCKER_TAG_NAME
+      
     - name: Publish the Docker image
-      run: docker push docker.pkg.github.com/toliner/asciidoctor-docker-image/asciidoctor:$(date +%s)
+      run: docker push docker.pkg.github.com/toliner/asciidoctor-docker-image/asciidoctor:$DOCKER_TAG_NAME
